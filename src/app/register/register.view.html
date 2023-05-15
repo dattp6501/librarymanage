@@ -1,0 +1,94 @@
+<section class="vh-120 gradient-custom-background">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius:25px;min-height:100vh;">
+                    <div class="card-header text-center">
+                        <h2 class="card-title text-center">SIGN UP</h2>
+                    </div>
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p> -->
+                                <form class="mx-1 mx-md-4" role="form" name="formRegister">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example1c"> Your Fullname <span style="color: red;">*</span></label>
+                                            <input ng-model="fullName" name="fullName" type="text" id="form3Example1c" class="form-control" required/>
+                                            <span ng-show="formRegister.fullName.$invalid" style="color:red;">Vui lòng nhập Fullname</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example3c">Your Email <span style="color: red;">*</span></label>
+                                            <input ng-model="email" name="email" type="text" id="form3Example3c" class="form-control"
+                                            ng-pattern='/^(([a-z0-9]+(\.[a-z0-9])*)|(\".+\"))@(([a-z0-9]+\.)+[a-z0-9]{2,})$/'
+                                            placeholder="VD: dattp@gmail.com"
+                                            required/>
+                                            <span ng-show="formRegister.email.$invalid" style="color:red">Sai định dạng email</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Username">Username <span style="color: red;">*</span></label>
+                                            <input name="userName" ng-model="userName" type="text" id="form3Username" class="form-control" required/>
+                                            <span ng-show="formRegister.userName.$invalid" style="color:red;">Vui lòng nhập Username</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example4c">Password <span style="color: red;">*</span></label>
+                                            <input name="passWord1" ng-model="passWord1" type="password" id="form3Example4c" class="form-control" required/>
+                                            <span ng-show="formRegister.passWord1.$invalid" style="color:red;">Vui lòng nhập Password</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example4cd">Repeat your password <span style="color: red;">*</span></label>
+                                            <input name="passWord2" ng-model="passWord2" type="password" id="form3Example4cd" class="form-control" required/>
+                                            <span ng-show="formRegister.passWord2.$invalid" style="color:red;">Vui lòng xác nhận lại Password</span>
+                                            <span ng-show="!formRegister.passWord2.$invalid&&(passWord2!=passWord1)" style="color:red;">Mật khẩu xác nhận không khớp</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-check d-flex justify-content-center mb-5">
+                                        <input class="form-check-input me-2" type="checkbox" value=""
+                                            id="form2Example3c" />
+                                        <label class="form-check-label" for="form2Example3">
+                                            I agree all statements in <a href="#!">Terms of service</a>
+                                        </label>
+                                    </div> -->
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button ng-disabled="!formRegister.$valid" ng-click="SignIn()" type="submit" class="btn btn-dark btn-sm gradient-custom-background form-control">Register</button>
+                                        <a href="#/login" class="btn btn-success form-control" style="margin-left:10px;">Login</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <img src="/src/app/assets/images/image_login.jpg" class="img-fluid form-control" alt="Sample image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div clas="loader-txt">
+                    <p>Đang tải dữ liêu! Vui lòng chờ trong giây lát</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

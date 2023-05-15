@@ -1,0 +1,102 @@
+<section>
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-12 bg-dark">
+                <div class="row d-flex justify-content-center align-items-center" style="margin-top:20px;">
+                    <div class="col-md-10">
+                        <div class="card bg-dark" style="min-height:120vh;border:none;">
+                            <!-- <div class="card-header text-center">
+                                <h2 class="card-title text-center">BOOK</h2>
+                            </div> -->
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom:20px;">
+                                    <div class="col-md-4">
+                                        <input type="date" ng-model="modelDate"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                        <table ng-table="tableParamsHistoryTransaction"
+                                            class="table table-hover" show-filter="false">
+                                            <tbody>
+                                                <tr ng-repeat="r in tableDisplayHistoryTransaction" class="table-dark">
+                                                    <td data-title="'STT'" class="rowTd text-start">{{$index+1}}</td>
+                                                    <td data-title="'Mã đơn hàng'" filter="{booking_id:'text'}" sortable="''" class="rowTd text-start">
+                                                        #{{r.booking_id}}</td>
+                                                    <td data-title="'Loại giao dịch'" class="rowTd text-start">
+                                                        <img ng-show="r.payment_type&&r.payment_type=='VNPay'"
+                                                            src="/src/app/assets/images/vnpay_logo_1.webp" style="height:25px"
+                                                            alt="">
+                                                    </td>
+                                                    <td data-title="'Thời gian'" filter="{date:'text'}" sortable="''" class="rowTd text-start">
+                                                        {{FomatDate(r.date)}}
+                                                    </td>
+                                                    <td data-title="'Giá'" sortable="''" class="rowTd text-start">
+                                                        {{r.amount | number : fractionSize}} VND
+                                                    </td>
+                                                    <td data-title="'Chi tiết'" class="rowTd text-start">
+                                                        <button ng-click="DetailHistoryTrasaction(r)" type="button"
+                                                            class="btn btn-outline-success">Chi tiết</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalHistoryTransactionDetail" tabindex="-1" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start text-black p-4">
+                    <h5 class="modal-title text-uppercase mb-5">
+                        <img ng-src="{{modelHistoryTransactionSelected.logo_bank}}" height="50" alt="">
+                    </h5>
+                    <h4 class="mb-5" style="color: #35558a;margin-bottom:0 !important;">
+                        - {{modelHistoryTransactionSelected.amount | number : fractionSize}} VND
+                    </h4>
+                    <span class="mb-0">{{modelHistoryTransactionSelected.date}}</span>
+                    <hr class="mt-2 mb-4"
+                        style="height: 0; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
+
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold mb-0">Tài khoản người gửi</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <p class="small mb-0">{{modelHistoryTransactionSelected.card_holder}}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between pb-1">
+                        <p class="small">{{modelHistoryTransactionSelected.card_number}}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold">Mã giao dịch: {{modelHistoryTransactionSelected.transaction_no}}</p>
+                    </div>
+
+                </div>
+                <!-- <div class="modal-footer d-flex justify-content-center border-top-0 py-4">
+                    <button type="button" class="btn btn-primary btn-lg mb-1" style="background-color: #35558a;">
+                        Track your order
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+<style>
+    thead tr:first-child th {
+        text-align:left;
+    }
+</style>
+</section>

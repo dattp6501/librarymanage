@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LibraryManagerApp">
+
+<head>
+  <title>A JavaScript project</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="/src/app/assets/global/plugins/bootstrap3.1.1/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="/src/app/assets/global/plugins/bootstrap5.2.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/src/app/assets/global/plugins/bootstrap-toastr/toastr.min.css">
+  <!-- <script src="https://kit.fontawesome.com/e7c3a3eb40.js" crossorigin="anonymous"></script> -->
+  <script src="/src/app/assets/global/plugins/icon.js" crossorigin="anonymous"></script>
+</head>
+
+<body ng-controller="AppController" style="background-color:#dadada;"><!--f0f0f0-->
+  <script src="/src/app/assets/global/plugins/bootstrap5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/src/app/assets/global/plugins/jquery/jquery.min.js"></script>
+  <script src="/src/app/assets/global/plugins/jquery/jquery-migrate.min.js"></script>
+  <script src="/src/app/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="/src/app/assets/global/plugins/jquery/jquery.blockui.min.js"></script>
+  <script src="/src/app/assets/global/plugins/jquery/jquery.cokie.min.js"></script>
+
+  <script src="/src/app/assets/global/plugins/angularjs/angular.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/angular-cookies.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/angular-sanitize.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/angular-touch.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/plugins/angular-ui-router.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js"></script>
+  <script src="/src/app/assets/global/plugins/angular-ui-router-styles-master/ui-router-styles.js"></script>
+  <script src="/src/app/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+  <script src="/src/app/assets/global/plugins/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="/src/app/assets/global/plugins/sweetalert2/dist/sweetalert2.min.css">
+
+  <link rel="stylesheet" href="/src/app/assets/global/plugins/ng-table-master/dist/ng-table.css">
+  <script src="/src/app/assets/global/plugins/ng-table-master/dist/ng-table.min.js"></script>
+  <script src="/src/app/assets/js/custom.js"></script>
+  <!-- chart -->
+  <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/modules/data.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/modules/drilldown.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+  <script src="/src/app/assets/global/plugins/highchart/highcharts.js"></script>
+  <script src="/src/app/assets/global/plugins/highchart/drilldown.js"></script>
+
+  <!-- <script src="/src/app/assets/global/plugins/highcharts/js/highcharts.js"></script> -->
+  <!-- <script src="/src/app/assets/global/plugins/highcharts/js/modules/drilldown.js"></script> -->
+  <!--  -->
+
+  <!-- date picker -->
+  <!-- <script type="text/javascript" src="YearPicker.js"></script> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> -->
+  <link rel="stylesheet" href="/src/app/assets/global/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css">
+  <script src="/src/app/assets/global/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
+  <script type="text/javascript" src="/src/app/assets/global/plugins/bootstrap-datepicker/moment.min.js"></script>
+  <script type="text/javascript"
+    src="/src/app/assets/global/plugins/bootstrap-datepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="/src/app/assets/global/plugins/bootstrap-datepicker/daterangepicker.css" />
+  <!-- BEGIN MAP BOX -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+    type="text/css">
+  <!-- <link href="/src/app/assets/global/plugins/mapbox-gl/mapbox-gl.css" rel="stylesheet">
+    <script src="/src/app/assets/global/plugins/mapbox-gl/mapbox-gl.js"></script>
+    <script src="/src/app/assets/global/plugins/mapbox-gl/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="/src/app/assets/global/plugins/mapbox-gl/mapbox-gl-directions.css" type="text/css"> -->
+  <!-- END MAP BOX -->
+  <!--  -->
+  <script src="/src/app/js/main.js"></script>
+  <div ng-include src="'./app/footer/header.view.html'" ng-show="sh_header"></div>
+  <div ui-view class="fade-in-up" style="min-height:100vh;"></div>
+  <div ng-include src="'./app/footer/footer.view.html'"></div>
+
+  <script src="/src/app/login/login.controller.js"></script>
+  <script src="/src/app/login/login.service.js"></script>
+
+  <script src="/src/app/dashboard/dashboard.controller.js"></script>
+  <script src="/src/app/dashboard/dashboard.service.js"></script>
+
+  <script src="/src/app/manager/book/book.controller.js"></script>
+  <script src="/src/app/manager/book/book.service.js"></script>
+
+  <script src="/src/app/manager/orderbook/orderbook.controller.js"></script>
+  <script src="/src/app/manager/orderbook/orderbook.service.js"></script>
+
+  <script src="/src/app/manager/voucher/voucherbooking/voucherbooking.controller.js"></script>
+  <script src="/src/app/manager/voucher/voucherbooking/voucherbooking.service.js"></script>
+
+  <script src="/src/app/order/order.controller.js"></script>
+  <script src="/src/app/order/order.service.js"></script>
+
+  <script src="/src/app/profile/profile.controller.js"></script>
+  <script src="/src/app/profile/profile.service.js"></script>
+
+  <script src="/src/app/register/register.controller.js"></script>
+  <script src="/src/app/register/register.service.js"></script>
+
+  <script src="/src/app/bookdetail/bookdetail.controller.js"></script>
+  <script src="/src/app/bookdetail/bookdetail.service.js"></script>
+
+  <script src="/src/app/cart/cart.controller.js"></script>
+  <script src="/src/app/cart/cart.service.js"></script>
+
+  <script src="/src/app/stats/area/area.controller.js"></script>
+  <script src="/src/app/stats/area/area.service.js"></script>
+
+  <script src="/src/app/history/historytransaction/historytransaction.controller.js"></script>
+  <script src="/src/app/history/historytransaction/historytransaction.service.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<section class="bg-dark">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-dark" style="min-height:120vh;border:none;">
+                    <div class="card-body">
+                        <div class="row" style="margin-top:20px;margin-bottom:40px;">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label for="inputPassword6" class="col-form-label text-white">Từ : </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="modelDate" ng-change="GetAllBookingByDate()" type="date" id="inputPassword6"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select ng-model="modelModeStatusSelected"
+                                            ng-options="filter.name for filter in filterStatusBooking"
+                                            ng-change="ChangFilterStatusBooking(modelModeStatusSelected)" class="form-select">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="tableDataOrderBook.length<=0">
+                            <div class="col-md-12 text-center">
+                                Không có đơn hàng nào
+                            </div>
+                        </div>
+                        <div ng-show="tableDataOrderBook.length>0" class="row justify-content-center">
+                            <div class="col-md-12 scroller scroll-custom-y bg-dark"
+                                style="max-height:120vh;overflow-y:auto;background-color:#ffffff;">
+                                <table ng-table="tableParamsOrderBook"
+                                    class="table table-hover" show-filter="true">
+                                    <tbody>
+                                        <tr ng-repeat="bk in tableDisplayOrderBook" class="table-dark">
+                                            <td data-title="'STT'" class="rowTd text-center" style="width:3%;">
+                                                {{$index+1}}</td>
+                                            <td data-title="'Ngày tạo'" sortable="'booking_date'"
+                                                class="rowTd text-center" style="width:10%;">
+                                                {{bk.booking_date}}</td>
+                                            <td data-title="'Khách hàng'" sortable="'booking_date'"
+                                                class="rowTd text-left" style="width:10%;">
+                                                {{bk.member.member_fullname}}
+                                                <!-- <span >({{bk.member.member_email}})</span> -->
+                                            </td>
+                                            <td data-title="'Thành tiền'" sortable="'booking_total_price'"
+                                                class="rowTd text-end" style="width:8%;">
+                                                {{bk.booking_total_price | number : fractionSize}}đ
+                                            </td>
+                                            <td data-title="'Đã thanh toán'" sortable="'booking_pay'"
+                                                class="rowTd text-end" style="width:8%;">
+                                                {{bk.booking_pay | number : fractionSize}}đ
+                                            </td>
+                                            <td data-title="'Còn nợ'" sortable="''" class="rowTd text-end"
+                                                style="width:8%;">
+                                                {{bk.booking_total_price-bk.booking_pay | number : fractionSize}}đ
+                                            </td>
+                                            <!-- <td data-title="'Ghi chú'" class="rowTd text-center" style="width:17%;">
+                                                    {{bk.booking_note}}</td> -->
+                                            <td data-title="'Trạng thái'" sortable="''" class="rowTd text-center"
+                                                style="width:10%;">
+                                                <span
+                                                    ng-style="GetStyleOrderBook(bk.booking_success)">{{CheckStatusOrderBook(bk.booking_success)}}</span>
+                                            </td>
+                                            <td class="rowTd text-center" style="width:5%">
+                                                <button type="button" class="btn btn-outline-success btn-sm"
+                                                    ng-click="DetailBooking(bk)">Chi tiết</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade bd-example-modal-xl" tabindex="-1" id="modal-booking-detail">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title">Chi tiết đơn hàng</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-12">
+                        <div class="card" style="border-radius:10px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <p class="lead fw-normal mb-0" style="color: #a8729a;">Biên lai</p>
+                                    <p class="small text-muted mb-0" ng-show="BookingSelected.voucher_booking.length>0">
+                                        Receipt Voucher : {{BookingSelected.voucher_booking[0].voucher_booking_name}}
+                                    </p>
+                                    <p class="small text-muted mb-0"
+                                        ng-show="BookingSelected.voucher_booking.length<=0">Receipt Voucher : Không có
+                                    </p>
+                                </div>
+                                <div class="card shadow-0 border mb-4">
+                                    <div ng-repeat="booked in BookingSelected.bookeds" class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-2" style="cursor:pointer;">
+                                                <img src="/src/app/assets/images/default.jpg"
+                                                    ng-show="booked.book.book_image==undefined||booked.book.book_image==null||booked.book.book_image==''"
+                                                    class="img-fluid" alt="book image">
+                                                <img ng-src="data:image/jpeg;base64,{{booked.book.book_image}}"
+                                                    ng-show="booked.book.book_image!=undefined&&booked.book.book_image!=null&&booked.book.book_image!=''"
+                                                    class="img-fluid" alt="book image">
+                                            </div>
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0" ng-show="booked.book!=undefined">
+                                                    {{booked.book.book_title}}</p>
+                                                <p class="text-muted mb-0" ng-show="booked.book==undefined">Sách không
+                                                    tồn tại</p>
+                                            </div>
+                                            <!-- <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">White</p>
+                                            </div>
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">Capacity: 64GB</p>
+                                            </div> -->
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">Số lượng: {{booked.booked_number |
+                                                    number : fractionSize}}</p>
+                                            </div>
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">{{booked.booked_price | number :
+                                                    fractionSize}}đ</p>
+                                            </div>
+                                        </div>
+                                        <!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-md-2">
+                                                <p class="text-muted mb-0 small">Track Order</p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="progress" style="height: 6px; border-radius: 16px;">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: 65%; border-radius: 16px; background-color: #a8729a;"
+                                                        aria-valuenow="65" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-around mb-1">
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for
+                                                        delivary</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+
+
+                                <div class="d-flex justify-content-between pt-2">
+                                    <p class="fw-bold mb-0">Chi tiết đơn hàng</p>
+                                    <p class="text-muted mb-0">
+                                        <span class="fw-bold me-4">Tổng: </span>
+                                        {{TotalPrice(BookingSelected) | number : fractionSize}}đ
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between pt-2">
+                                    <p class="text-muted mb-0">Mã đơn hàng: #{{BookingSelected.booking_id}}</p>
+                                    <p class="text-muted mb-0">
+                                        <span class="fw-bold me-4">Giảm: </span> {{Discount(BookingSelected) | number :
+                                        fractionSize}}đ
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-muted mb-0">Ngày : {{BookingSelected.booking_date}}</p>
+                                    <p class="text-muted mb-0">
+                                        <span class="fw-bold me-4">VAT(0%): </span>
+                                        0đ
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between mb-5">
+                                    <p class="small text-muted mb-0" ng-show="BookingSelected.voucher_booking.length>0">
+                                        Receipt Voucher : {{BookingSelected.voucher_booking[0].voucher_booking_name}}
+                                    </p>
+                                    <p class="small text-muted mb-0"
+                                        ng-show="BookingSelected.voucher_booking.length<=0">Receipt Voucher : Không có
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                        <span class="fw-bold me-4">Phí vận chuyển: </span>
+                                        Free
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 px-4 py-5 gradient-custom-background"
+                                style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                                <h5
+                                    class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                    Tổng số chi trả:
+                                    <span class="h2 mb-0 ms-2">{{BookingSelected.booking_total_price | number :
+                                        fractionSize}} đ</span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" ng-show="BookingSelected.booking_success==-1">
+                <button ng-click="CancelBooking(BookingSelected)" type="button" class="btn btn-secondary">Hủy
+                    đơn</button>
+                <!-- <button type="button" class="btn btn-danger" >Cập nhật</button> -->
+                <button ng-click="ConfirmBooking()" type="button" class="btn btn-danger">Xác nhận</button>
+                <!--data-bs-dismiss="modal"-->
+            </div>
+        </div>
+    </div>
+</div>

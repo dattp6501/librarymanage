@@ -1,0 +1,297 @@
+<!-- <nav class="navbar navbar-dark bg-dark gradient-custom-background">
+    <div class="container-fluid">
+        <div class="offcanvas offcanvas-start text-bg-dark gradient-custom-background" tabindex="-1"
+            data-bs-backdrop="static" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close" id="logout-close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" ng-click="Logout()" href="#">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="#/profile" style="color:#ffffff;">
+            <span>
+                {{user_name}}
+                <img ng-show="profile.mem_avatar==undefined||profile.mem_avatar==null||profile.mem_avatar==''"
+                    src="/src/app/assets/images/user_default.png" alt="avatar"
+                    class="rounded-circle img-fluid" style="width:30px;">
+                <img ng-show="profile.mem_avatar!=undefined&&profile.mem_avatar!=null&&profile.mem_avatar!=''" 
+                ng-src="data:image/jpeg;base64,{{profile.mem_avatar}}" alt="avatar"
+                class="rounded-circle img-fluid" style="width:30px;height:30px;">
+            </span>
+        </a>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark gradient-custom-background">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#/dashboard">DASHBOARD</a>
+            </li>
+            <li class="nav-item" ng-show="profile.mem_group=='customer'">
+                <a class="nav-link active" href="#/bookingbook">SÁCH</a>
+            </li>
+            <li class="nav-item dropdown" ng-show="profile.mem_group=='admin'">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    QUẢN LÝ
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark gradient-custom-background">
+                    <li><a class="dropdown-item" href="#/manager/book" style="color:#ffffff;">SÁCH</a></li>
+                    <li><a class="dropdown-item" href="#/manager/orderbook" style="color:#ffffff;">ĐƠN HÀNG</a></li>
+                    <li><a class="dropdown-item" href="#/manager/voucherbooking" style="color:#ffffff;">VOUCHER</a></li>
+                </ul>
+            </li>
+            <li class="nav-item" ng-show="profile.mem_group=='admin'">
+                <a class="nav-link active" href="#/stats/area">THÔNG KÊ</a>
+            </li>
+            <li class="nav-item" ng-show="profile.mem_group=='customer'">
+                <a class="nav-link active" href="#/order">ĐƠN HÀNG</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-brand" ng-show="profile.mem_group=='customer'">
+            <li class="nav-item">
+                <a href="#/cart" class="text-dark">
+                    <div class="position-relative">
+                        <i class="fa-solid fa-cart-shopping fa-lg" style="color:#ffffff;"></i>
+                        <span class="position-absolute top-0 start-30 translate-middle badge rounded-pill bg-danger" style="background-color:#57c5f8 !important;">
+                            {{cart.books.length}}
+                        </span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav> -->
+<!--Main Navigation-->
+<!--Main Navigation-->
+<header>
+    <!-- Sidebar -->
+    <nav class="navbar d-lg-block">
+        <div class="container-fluid">
+            <div class="offcanvas offcanvas-start text-white bg-dark" tabindex="-1" style="width:260px;"
+                data-bs-backdrop="static" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">
+                        <img ng-show="profile.mem_avatar!=undefined&&profile.mem_avatar!=null&&profile.mem_avatar!=''" 
+                            ng-src="data:image/jpeg;base64,{{profile.mem_avatar}}" class="rounded-circle"
+                            height="40" width="40" alt="avatar"/>
+                        <img ng-show="profile.mem_avatar==undefined||profile.mem_avatar==null||profile.mem_avatar==''"
+                            src="/src/app/assets/images/user_default.png" alt="avatar" class="rounded-circle" 
+                            height="40" width="40">
+                        <span> {{user_name}}</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close" id="logout-close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <a class="list-group-item list-group-item-action py-2" href="#/dashboard">
+                        <i class="fa-solid fa-house"></i><span> HOME</span>
+                    </a>
+                    <!-- admin -->
+                    <a ng-show="profile.mem_group=='admin'"
+                        class="list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                        data-bs-toggle="collapse" href="#collapseExample1" aria-expanded="true"
+                        aria-controls="collapseExample1">
+                        <i class="fa-solid fa-list-check"></i><span> QUẢN LÝ</span>
+                    </a>
+                    <ul id="collapseExample1" ng-show="profile.mem_group=='admin'"
+                        class="collapse show list-group list-group-flush text-white bg-dark">
+                        <li class="list-group-item py-1 text-white bg-dark">
+                            <i class="fa-solid fa-book-open"></i>
+                            <a href="#/manager/book" class="text-reset">SÁCH</a>
+                        </li>
+                        <li class="list-group-item py-1 text-white bg-dark">
+                            <i class="fa-solid fa-truck"></i>
+                            <a href="#/manager/orderbook" class="text-reset">ĐƠN HÀNG</a>
+                        </li>
+                        <li class="list-group-item py-1 text-white bg-dark">
+                            <i class="fa-solid fa-receipt"></i>
+                            <a href="#/manager/voucherbooking" class="text-reset">VOUCHER</a>
+                        </li>
+                    </ul>
+                    <a ng-show="profile.mem_group=='admin'"
+                        class="list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                        data-bs-toggle="collapse" href="#collapseStats" aria-expanded="true"
+                        aria-controls="collapseStats">
+                        <i class="fa-solid fa-chart-simple"></i><span> THÔNG KÊ</span>
+                    </a>
+                    <ul id="collapseStats" ng-show="profile.mem_group=='admin'"
+                        class="collapse show list-group list-group-flush text-white bg-dark">
+                        <li class="list-group-item py-1 text-white bg-dark">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <a href="#/stats/area" class="text-reset">KHU VỰC</a>
+                        </li>
+                    </ul>
+                    <!-- custemer -->
+                    <a class="list-group-item list-group-item-action py-2" ng-show="profile.mem_group=='customer'"
+                        href="#/order">
+                        <i class="fa-solid fa-truck"></i><span> ĐƠN HÀNG</span>
+                    </a>
+                    <!-- all -->
+                    <a class="list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                        data-bs-toggle="collapse" href="#collapseHistory" aria-expanded="true"
+                        aria-controls="collapseHistory">
+                        <i class="fa-solid fa-clock-rotate-left"></i><span> LỊCH SỬ</span>
+                    </a>
+                    <ul id="collapseHistory"
+                        class="collapse show list-group list-group-flush text-white bg-dark">
+                        <li class="list-group-item py-1 text-white bg-dark">
+                            <i class="fa-sharp fa-solid fa-building-columns"></i>
+                            <a href="#/history/transaction" class="text-reset">GIAO DỊCH</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark gradient-custom-background">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#/dashboard">
+                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="25" alt="MDB Logo"
+                    loading="lazy" />
+            </a>
+            <button  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+                aria-controls="offcanvasDarkNavbar"
+                class="navbar-brand gradient-custom-background" style="border:none;">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <!-- Notification dropdown -->
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Some news</a></li>
+                        <li><a class="dropdown-item" href="#">Another news</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </li>
+                    </ul>
+                </li> -->
+
+                <!-- Icon -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link me-3 me-lg-0" href="#">
+                        <i class="fas fa-fill-drip"></i>
+                    </a>
+                </li> -->
+                <!-- Icon -->
+                <!-- <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li> -->
+
+                <!-- Icon dropdown -->
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="flag-united-kingdom flag m-0"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English
+                                <i class="fa fa-check text-success ms-2"></i></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li class="nav-item me-3 me-lg-0" ng-show="profile.mem_group=='customer'">
+                    <a href="#/cart" class="nav-link">
+                        <div class="position-relative">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color:#ffffff;"></i>
+                            <span class="position-absolute top-0 start-30 translate-middle badge rounded-pill bg-danger" style="background-color:#f52c2c !important;">
+                                {{cart.books.length}}
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <!-- Avatar -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                        id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span style="margin-right:10px;">{{user_name}}</span>
+                        <img ng-show="profile.mem_avatar!=undefined&&profile.mem_avatar!=null&&profile.mem_avatar!=''" 
+                            ng-src="data:image/jpeg;base64,{{profile.mem_avatar}}" class="rounded-circle"
+                            height="30" width="30" alt="avatar"/>
+                        <img ng-show="profile.mem_avatar==undefined||profile.mem_avatar==null||profile.mem_avatar==''"
+                            src="/src/app/assets/images/user_default.png" alt="avatar" class="rounded-circle" 
+                            height="30" width="30">
+                        
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-white gradient-custom-background" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="#/profile" style="color:#ffffff">My profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" ng-click="Logout()" style="color:#ffffff">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top:17px;">
+    <div class="container pt-4"></div>
+</main>
+<!--Main layout-->

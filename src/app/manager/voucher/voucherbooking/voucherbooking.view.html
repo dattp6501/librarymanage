@@ -1,0 +1,178 @@
+<section class="bg-dark">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center">
+            <!-- <div class="col-md-1"></div> -->
+            <div class="col-md-12">
+                <div class="card bg-dark" style="min-height:120vh;border:none;">
+                    <div class="card-body">
+                        <div class="row" style="margin-top:20px;margin-bottom:50px;">
+                            <div class="col-md-2">
+                                <button ng-click="ShowModalAddVoucherBooking()"
+                                    class="btn btn-dark gradient-custom-background">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Thêm voucher
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <select ng-options="mode.name for mode in filterActive" ng-model="modelModeSelected"
+                                    ng-click="ChangeModeFilterTableVoucherBooking(modelModeSelected)"
+                                    class="form-control form-select">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="tableDataVoucher.length<=0">
+                            <div class="col-md-10 text-center">
+                                Không có voucher nào
+                            </div>
+                        </div>
+                        <div ng-show="tableDataVoucher.length>0" class="row justify-content-center scroller">
+                            <div class="col-md-12">
+                                <table ng-table="tableParamsVoucher"
+                                    class="table table-hover" show-filter="true">
+                                    <tbody>
+                                        <tr ng-repeat="v in tableDisplayVoucher" class="table-dark">
+                                            <td data-title="'STT'" class="rowTd text-center" style="width:5%;">{{$index+1}}</td>
+                                            <td data-title="'Ghi chú'" class="rowTd text-start"style="width:15%;">
+                                                {{v.voucher_booking_name}}</td>
+                                            <td data-title="'Ngày tạo'" sortable="'voucher_booking_created_date'" class="rowTd text-start"
+                                                style="width:15%;">
+                                                {{FomatDate(v.voucher_booking_created_date)}}</td>
+                                            <td data-title="'GIảm'" sortable="''" class="rowTd text-start"style="width:5%;">
+                                                <span ng-show="v.voucher_booking_type=='n'">{{v.voucher_booking_value | number : fractionSize}}đ</span>
+                                                <span ng-show="v.voucher_booking_type=='%'">{{v.voucher_booking_value}}%</span>
+                                            </td>
+                                            <td data-title="'Ghi chú'" class="rowTd text-center"style="width:15%;">
+                                                {{v.voucher_booking_note}}</td>
+                                            <td data-title="'Trạng thái'" sortable="''" class="rowTd text-center"style="width:10%;">
+                                                <span ng-style="GetStyleVoucherBooking(v.voucher_booking_active)">{{CheckStatusVoucherBooking(v.voucher_booking_active)}}</span>
+                                            </td>
+                                            <td class="rowTd text-center" style="width:5%">
+                                                <button ng-click="DetailVoucherBooking(v)"
+                                                    type="button" class="btn btn-outline-success btn-sm">Chi tiết</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" tabindex="-1" id="modal-add-voucher-booking">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm Voucher cho đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="mx-1 mx-md-4" role="form" name="formAddVoucherBooking">
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formAddType1">Tên <span style="color: red;">*</span></label>
+                                    <input ng-model="newVoucherBooking.voucher_booking_name" name="name" type="text" id="formAddType1" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formAddType2">Loại <span style="color: red;">*</span></label>
+                                    <select ng-options="type for type in ListTypeVoucher" ng-model="newVoucherBooking.voucher_booking_type"
+                                        name="" id="formAddType2" class="form-control form-select" required>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formAddType3">Giá trị giảm <span style="color: red;">*</span></label>
+                                    <input ng-model="newVoucherBooking.voucher_booking_value" name="name" type="number" id="formAddType3" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formAddType4">Ghi chú</label>
+                                    <input ng-model="newVoucherBooking.voucher_booking_note" name="note" type="text" id="formAddType4" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-end mb-4" style="float:right;">
+                                <button ng-click="AddVoucherBooking(newVoucherBooking)" 
+                                    ng-disabled="!formAddVoucherBooking.$valid||
+                                    (newVoucherBooking.voucher_booking_value!=undefined&&newVoucherBooking.voucher_booking_value<=0)" 
+                                    type="submit" class="btn btn-success">
+                                    Thêm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade " tabindex="-1" id="modal-voucher-booking-detail"><!--bd-example-modal-xl-->
+    <div class="modal-dialog "><!--modal-xl-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-12">
+                        <form class="mx-1 mx-md-4" role="form" name="formEditVoucherBooking">
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formEditType1">Tên</label>
+                                    <input ng-model="VoucherbookingSelected.voucher_booking_name" id="formEditType1" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formEditType2">Kiểu giảm giá</label>
+                                    <input ng-model="VoucherbookingSelected.voucher_booking_type" id="formEditType2" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formEditType3">Giá trị giảm</label>
+                                    <input ng-model="VoucherbookingSelected.voucher_booking_value" id="formEditType3" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formEditType4">Ngày tạo</label>
+                                    <input ng-model="VoucherbookingSelected.voucher_booking_created_date" id="formEditType4" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="formEditType5">Ghi chú</label>
+                                    <input ng-model="VoucherbookingSelected.voucher_booking_note" id="formEditType5" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="CLoseVoucherBooking(VoucherbookingSelected)"
+                    ng-show="VoucherbookingSelected.voucher_booking_active==1"
+                    type="button" class="btn btn-dark gradient-custom-background">
+                    <i class="fa-solid fa-lock"></i>
+                    Đóng voucher
+                </button>
+                <button ng-click="OpenVoucherBooking(VoucherbookingSelected)"
+                    ng-show="VoucherbookingSelected.voucher_booking_active==0"
+                    type="button" class="btn btn-dark gradient-custom-background">
+                    <i class="fa-solid fa-lock-open"></i>
+                    Mỏ voucher
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

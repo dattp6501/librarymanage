@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LibraryManagerApp">
+
+<head>
+  <title>A JavaScript project</title>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="/src/app/assets/global/plugins/bootstrap3.1.1/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="/librarymanagerapi/src/app/assets/global/plugins/bootstrap5.2.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/librarymanagerapi/src/app/assets/global/plugins/bootstrap-toastr/toastr.min.css">
+  <!-- <script src="https://kit.fontawesome.com/e7c3a3eb40.js" crossorigin="anonymous"></script> -->
+  <script src="/librarymanagerapi/src/app/assets/global/plugins/icon.js" crossorigin="anonymous"></script>
+</head>
+<body ng-controller="AppController">
+  <script src="/librarymanagerapi/src/app/assets/global/plugins/bootstrap5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/librarymanagerapi/src/app/assets/global/plugins/jquery/jquery.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/jquery/jquery-migrate.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/jquery/jquery.blockui.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/jquery/jquery.cokie.min.js"></script>
+
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/angular.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/angular-cookies.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/angular-sanitize.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/angular-touch.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/plugins/angular-ui-router.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/angular-ui-router-styles-master/ui-router-styles.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="/librarymanagerapi/src/app/assets/global/plugins/sweetalert2/dist/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="/librarymanagerapi/src/app/assets/global/plugins/ng-table-master/dist/ng-table.css">
+    <script src="/librarymanagerapi/src/app/assets/global/plugins/ng-table-master/dist/ng-table.min.js"></script>
+    <script src="/librarymanagerapi/src/app/assets/js/custom.js"></script>
+
+
+    <script src="/librarymanagerapi/src/app/js/main.js"></script>
+    <div ng-include src="'./app/footer/header.view.html'" ng-show="sh_header"></div>
+    <div ui-view class="fade-in-up" style="min-height:100vh;"></div>
+    <div ng-include src="'./app/footer/footer.view.html'"></div>
+
+    <script src="/librarymanagerapi/src/app/login/login.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/login/login.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/dashboard/dashboard.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/dashboard/dashboard.service.js"></script>
+    
+    <script src="/librarymanagerapi/src/app/manager/book/book.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/manager/book/book.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/manager/orderbook/orderbook.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/manager/orderbook/orderbook.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/manager/voucher/voucherbooking/voucherbooking.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/manager/voucher/voucherbooking/voucherbooking.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/order/order.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/order/order.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/profile/profile.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/profile/profile.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/register/register.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/register/register.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/bookdetail/bookdetail.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/bookdetail/bookdetail.service.js"></script>
+
+    <script src="/librarymanagerapi/src/app/cart/cart.controller.js"></script>
+    <script src="/librarymanagerapi/src/app/cart/cart.service.js"></script>
+    
+
+    <div class="modal fade" id="md_load" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog bg-grey-steel bg-font-grey-steel">
+          <div class="modal-content">
+              <div class="portlet light no-padding margin-bottom-0">
+                  <div class="portlet-body">
+                      <h4 class="modal-title text-bold text-center">ĐANG TẢI DỮ LIỆU, VUI LÒNG CHỜ...</h4>
+                      <hr>
+                      <div class="number text-center">
+                          <span><i class="fa fa-spinner fa-pulse fa-3x"></i></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</body>
+</html>

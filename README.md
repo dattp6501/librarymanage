@@ -1,1 +1,2 @@
 # librarymanage
+A JavaScript project

@@ -1,0 +1,326 @@
+<section class="vh-120 gradient-custom-background" style="background-color:#c2c2c2;">
+    <div class="container">
+        <div class="row h-100">
+            <div class="col-md-12">
+                <div class="card text-black" style="border-radius:25px;min-height:100vh;">
+                    <div class="card-header text-center">
+                        <h2 class="card-title text-center">BOOK</h2>
+                    </div>
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-1">
+                                <form role="form" name="formBookdetail">
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailTitle"> Title <span
+                                                        style="color: red;">*</span></label>
+                                                <!-- <input ng-model="book.book_title" ng-disabled="!isEdit" type="text"
+                                                    id="formBookdetailTitle" class="form-control" required /> -->
+                                                <textarea ng-model="book.book_title" ng-disabled="!isEdit"
+                                                    id="formBookdetailTitle" class="form-control"
+                                                    rows="2" required>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailAuthor"> Author <span
+                                                        style="color: red;">*</span></label>
+                                                <!-- <input ng-model="book.book_author" ng-disabled="!isEdit" type="text"
+                                                    id="formBookdetailAuthor" class="form-control" required /> -->
+                                                <textarea ng-model="book.book_author" ng-disabled="!isEdit"
+                                                    id="formBookdetailAuthor" class="form-control"
+                                                    rows="2" required>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailPrice"> Price </label>
+                                                <input ng-model="book.book_price" ng-disabled="!isEdit" type="number"
+                                                    id="formBookdetailPrice" class="form-control"/>
+                                                <span ng-show="book.book_price!=undefined&&book.book_price<0"
+                                                    style="color:#ff0000;">Giá sách phải >= 0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col" ng-show="profile.mem_group=='admin'">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailNumber"> Number </label>
+                                                <input ng-model="book.book_number" ng-disabled="!isEdit" type="number"
+                                                    id="formBookdetailNumber" class="form-control"/>
+                                                <span ng-show="book.book_number!=undefined&&book.book_number<0"
+                                                style="color:#ff0000;">Số lượng sách phải >= 0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="formBookdetailDescription"> Description
+                                        </label>
+                                        <textarea ng-model="book.book_description" ng-disabled="!isEdit"
+                                            id="formBookdetailDescription" class="form-control"
+                                            rows="4" placeholder="Enter description ...">
+                                        </textarea>
+                                        <!-- <input ng-model="book.book_description" ng-disabled="!isEdit" type="text"
+                                            id="formBookdetailDescription" class="form-control" /> -->
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailReleaseDate"> Release Date
+                                                    <span style="color: red;">*</span></label>
+                                                <input ng-model="book.book_release_date" ng-disabled="!isEdit" type="date"
+                                                    id="formBookdetailReleaseDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="formBookdetailPageNumber"> Page Number
+                                                </label>
+                                                <input ng-model="book.book_page_number" ng-disabled="!isEdit" type="number"
+                                                    id="formBookdetailPageNumber" class="form-control" />
+                                                <span ng-show="book.book_page_number!=undefined&&book.book_page_number<0"
+                                                style="color:#ff0000;">Số trang sách phải > 0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="formBookdetailType"> Type
+                                        </label>
+                                        <select name="type" id="formBookdetailType" ng-disabled="!isEdit"
+                                            ng-model="book.book_typeo" ng-options="t.type_name for t in Typeos"
+                                            class="form-control form-select"></select>
+                                    </div>
+                                    <div class="text-end">
+                                        <button ng-show="!isAdd&&profile.mem_group=='admin'" ng-click="AddBook()"
+                                            ng-disabled="!formBookdetail.$valid" type="submit"
+                                            class="btn btn-dark gradient-custom-background btn-sm">Add</button>
+                                        <button ng-show="!isEdit&&profile.mem_group=='admin'" ng-click="EditBook()" type="submit"
+                                            class="btn btn-dark gradient-custom-background btn-sm"
+                                            style="padding-left: 2.5rem; padding-right:2.5rem;">Edit</button>
+                                        <button ng-disabled="!formBookdetail.$valid
+                                            ||(book.book_number!=undefined&&book.book_number<0)
+                                            ||(book.book_price!=undefined&&book.book_price<0)
+                                            ||(book.book_page_number!=undefined&&book.book_page_number<=0)" 
+                                            type="submit" ng-show="!isSave&&profile.mem_group=='admin'"
+                                            ng-click="SaveBook()" class="btn btn-dark gradient-custom-background btn-sm">Save</button>
+                                    </div>
+                                </form>
+                                <div class="row d-flex justify-content-center" ng-show="isAdd"
+                                    style="margin-top: 10px;">
+                                    <div class="col-md-12">
+                                        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                            <div class="card-body p-4">
+                                                <div class="form-outline mb-4">
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <!-- <ul class="ratings" ng-model="comment.star">
+                                                                <li class="star" ng-click="comment.star=5"></li>
+                                                                <li class="star" ng-click="comment.star=4"></li>
+                                                                <li class="star" ng-click="comment.star=3"></li>
+                                                                <li class="star" ng-click="comment.star=2"></li>
+                                                                <li class="star" ng-click="comment.star=1"></li>
+                                                            </ul> -->
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="stars">
+                                                                        <form ng-model="comment.star">
+                                                                            <input class="star star-5" id="star-5"
+                                                                                ng-click="comment.star=5"
+                                                                                type="radio" name="star"/>
+                                                                            <label class="star star-5"
+                                                                                for="star-5"></label>
+                                                                            <input class="star star-4" id="star-4"
+                                                                                ng-click="comment.star=4"
+                                                                                type="radio" name="star" />
+                                                                            <label class="star star-4"
+                                                                                for="star-4"></label>
+                                                                            <input class="star star-3" id="star-3"
+                                                                                ng-click="comment.star=3"
+                                                                                type="radio" name="star" />
+                                                                            <label class="star star-3"
+                                                                                for="star-3"></label>
+                                                                            <input class="star star-2" id="star-2"
+                                                                                ng-click="comment.star=2"
+                                                                                type="radio" name="star" />
+                                                                            <label class="star star-2"
+                                                                                for="star-2"></label>
+                                                                            <input class="star star-1" id="star-1"
+                                                                                ng-click="comment.star=1"
+                                                                                type="radio" name="star" />
+                                                                            <label class="star star-1"
+                                                                                for="star-1"></label>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <textarea ng-model="comment.content" class="form-control"
+                                                                id="textAreaExample" rows="4" style="background: #fff;"
+                                                                placeholder="Enter comment ..."></textarea>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <button ng-click="AddComments()" type="submit"
+                                                            class="btn btn-dark gradient-custom-background btn-sm">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div style="max-height:300px;overflow-y:auto;" class="scroll-custom-y">
+                                                    <div class="card mb-4" ng-repeat="c in book.comments">
+                                                        <div class="card-body">
+                                                            <p class="small" style="color:#5a5454;">{{c.comment_date}}
+                                                            <p>{{c.comment_content}}</p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="d-flex flex-row align-items-center">
+                                                                    <img ng-show="c.member.member_avatar==undefined||c.member.member_avatar==null||c.member.member_avatar==''"
+                                                                        src="/src/app/assets/images/user_default.png"
+                                                                        alt="avatar" width="25" height="25"/>
+                                                                    <img ng-show="c.member.member_avatar!=undefined&&c.member.member_avatar!=null&&c.member.member_avatar!=''"
+                                                                        ng-src="data:image/jpeg;base64,{{c.member.member_avatar}}"
+                                                                        alt="avatar" width="25" height="25"/>
+                                                                    <p class="small mb-0 ms-2">{{c.member.member_username}}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="d-flex flex-row align-items-center">
+                                                                    <p class="small text-muted mb-0">Upvote?</p>
+    
+                                                                    <i class="fa-solid fa-star mx-2 fa-xs"
+                                                                        style="margin-top:-0.16rem;" ng-style="StyleStar(c.comment_star)"></i>
+                                                                    <!-- <i class="far fa-thumbs-up mx-2 fa-xs text-black"
+                                                                        style="margin-top: -0.16rem;"></i> -->
+                                                                    <p class="small text-muted mb-0">{{c.comment_star}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
+                                <div class="row mb-4" ng-show="profile.mem_group=='admin'">
+                                    <input type="file" ng-disabled="!isEdit"
+                                        onchange="angular.element(this).scope().MediaUpload(event)">
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="row"
+                                            ng-show="book!=undefined&&book.book_image!=undefined&&book.book_image!=null&&book.book_image!=''">
+                                            <div class="col-md-12 text-end">
+                                                <button ng-click="RemoveIamge()" ng-disabled="!isEdit" ng-show="profile.mem_group=='admin'"
+                                                    class="btn btn-default" style="padding:0;">
+                                                    <span style="color:#ff0000;cursor:pointer;">
+                                                        <i class="fa fa-rectangle-xmark fa-xl icon-cus"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img ng-src="data:image/jpeg;base64,{{book.book_image}}" class="form-control"
+                                                ng-show="book!=undefined&&book.book_image!=null&&book.book_image!=''"
+                                                alt="Sample image">
+                                                <img src="/src/app/assets/images/default.jpg" class="form-control"
+                                                ng-show="book==undefined||book.book_image==null||book.book_image==''"
+                                                alt="Sample image">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="picture">
+                                                    <img ng-show="book==undefined||book.book_image==null||book.book_image==''" 
+                                                        src="/src/app/assets/images/image_upload.png" class="picture-src form-control">
+                                                    <img ng-show="profile.mem_avatar!=undefined&&profile.mem_avatar!=null&&profile.mem_avatar!=''" 
+                                                    ng-src="data:image/jpeg;base64,{{book.book_image}}" class="picture-src form-control">
+                                                    <input type="file" ng-disabled="!isEdit"
+                                                        onchange="angular.element(this).scope().MediaUpload(event)" class="input-image form-control"
+                                                        >
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div ng-show="profile.mem_group=='customer'&&book.book_title!=undefined" class="row" style="margin-top: 30px;">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 d-flex">
+                                                <button class="btn btn-link px-2"
+                                                    ng-click="SubBookNumber(book)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input ng-model="book.book_number"
+                                                    min="1" class="form-control"
+                                                    name="quantity" type="number" disabled
+                                                    />
+                                                <button class="btn btn-link px-2"
+                                                    ng-click="book.book_number=book.book_number+1;">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button ng-click="AddBookToCart(book)"
+                                                    class="btn btn-dark gradient-custom-background form-control">
+                                                    <i class="fa-solid fa-cart-plus fa-1x" style="color:#ffffff;"></i>
+                                                    Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div clas="loader-txt">
+                    <p>Đang tải dữ liêu! Vui lòng chờ trong giây lát</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var star = '.star',
+            selected = '.selected';
+        $(star).on('click', function () {
+            $(selected).each(function () {
+                $(this).removeClass('selected');
+            });
+            $(this).addClass('selected');
+        });
+    });
+</script>
+<style>
+    .picture {
+        width: 100%;
+        height: 100%;
+        background-color: #999999;
+        color: #FFFFFF;
+        margin: 0px auto;
+        overflow: hidden;
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+    }
+    .input-image{
+        display: block;
+        height: 50%;
+        right: 0;
+        top:110px;
+        opacity: 0 !important;
+        position: absolute;
+        width: 50%;
+        cursor: pointer !important;
+    }
+
+    .picture-src {
+        width: 100%;
+    }
+</style>

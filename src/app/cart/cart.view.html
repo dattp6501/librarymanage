@@ -1,0 +1,202 @@
+<section class="h-custom" style="background-color: #d2c9ff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-7">
+                                <div class="p-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-black">Giỏ hàng</h1>
+                                        <h6 class="mb-0 text-muted">{{cart.books.length | number : fractionSize}} sản
+                                            phẩm</h6>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div ng-repeat="cart_book in cart.books">
+                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                            <div class="col-md-2 col-lg-2 col-xl-2">
+                                                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
+                                                    class="img-fluid rounded-3" alt="Cotton T-shirt"> -->
+                                                <img ng-src="data:image/jpeg;base64,{{cart_book.book_image}}"
+                                                    ng-show="cart_book.book_image!=undefined&&cart_book.book_image!=null&&cart_book.book_image!=''"
+                                                    class="img-fluid rounded-3" alt="image">
+                                                <img src="/src/app/assets/images/default.jpg"
+                                                    ng-show="cart_book.book_image==undefined||cart_book.book_image==null||cart_book.book_image==''"
+                                                    class="img-fluid rounded-3" alt="image">
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <h6 class="text-muted">Shirt</h6>
+                                                <h6 class="text-black mb-0" ng-show="cart_book.book_title!=undefined">
+                                                    {{cart_book.book_title}}</h6>
+                                                <h6 class="text-black mb-0" ng-show="cart_book.book_title==undefined">
+                                                    Sách không tồn tại</h6>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4 col-xl-3 d-flex">
+                                                <button class="btn btn-link px-2" ng-click="SubBookNumber(cart_book)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input ng-model="cart_book.book_number" min="1" class="form-control"
+                                                    name="quantity" type="number" disabled />
+                                                <button class="btn btn-link px-2" ng-click="AddBookNumber(cart_book)">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                <h6 class="mb-0">{{cart_book.book_price*cart_book.book_number | number :
+                                                    fractionSize}}đ</h6>
+                                            </div>
+                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                <button ng-click="RemoveBookInCart(cart_book)" class="text-muted"
+                                                    style="padding:0;background-color:transparent;border:none;">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4">
+                                    </div>
+                                    <!-- <hr class="my-4">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img6.webp"
+                                                class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <h6 class="text-muted">Shirt</h6>
+                                            <h6 class="text-black mb-0">Cotton T-shirt</h6>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <button class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+
+                                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                                class="form-control form-control-sm" />
+
+                                            <button class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h6 class="mb-0">€ 44.00</h6>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp"
+                                                class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <h6 class="text-muted">Shirt</h6>
+                                            <h6 class="text-black mb-0">Cotton T-shirt</h6>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <button class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+
+                                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                                class="form-control form-control-sm" />
+
+                                            <button class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h6 class="mb-0">€ 44.00</h6>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4"> -->
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                            <a href="#/dashboard" class="btn btn-link">
+                                                <i class="fas fa-long-arrow-alt-left me-2"></i>
+                                                Back to shop
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 col-xl-6 text-end">
+                                            <button ng-click="AddBooksToCart()"
+                                            class="btn btn-info">Cập nhật giỏ hàng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5" style="background-color:#eae8e8;">
+                                <div class="p-5">
+                                    <!-- <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                    <hr class="my-4"> -->
+                                    <!-- <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="text-uppercase">Sản phẩm: {{cart.books.length}}</h5>
+                                        <h5>đ {{}}</h5>
+                                    </div> -->
+                                    <h5 class="text-uppercase mb-3">Địa chỉ nhận hàng</h5>
+                                    <div class="mb-4 pb-2">
+                                        <input type="text" ng-model="address" class="form-control">
+                                    </div>
+                                    <h5 class="text-uppercase mb-3">Voucher</h5>
+                                    <div class="mb-4 pb-2">
+                                        <select ng-model="voucherBookingSeleted"
+                                            ng-options="v.voucher_booking_name for v in ListVoucherBooking"
+                                            ng-change="ChangeVoucherBooking(voucherBookingSeleted)" class="form-select">
+                                        </select>
+                                    </div>
+                                    <!-- <h5 class="text-uppercase mb-3">Give code</h5>
+                                    <div class="mb-5">
+                                        <div class="form-outline">
+                                            <input type="text" id="form3Examplea2"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Examplea2">Enter your code</label>
+                                        </div>
+                                    </div> -->
+                                    <hr class="my-4">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <h5 class="text-uppercase">Tổng tiền: </h5>
+                                        <h5>đ {{cart.total_price | number : fractionSize}}</h5>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="justify-content-between mb-5">
+                                        <h5 class="text-uppercase">Chọn hình thức thanh toán:</h5>
+                                        <div class="mb-1" ng-repeat="pt in PaymentTypes">
+                                            <label>
+                                                <input ng-model="$parent.PaymentTypeSelected"
+                                                type="radio" name="iCheck" class="iradio_flat-blue"
+                                                ng-value="pt">
+                                                {{pt.name}} <img ng-show="pt.logo" ng-src="{{pt.logo}}" alt="" style="width:40px;height:30px;">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button ng-click="BuyingBook()" ng-disabled="cart.books.length<=0" type="button"
+                                        class="btn btn-dark btn-lg gradient-custom-background form-control"
+                                        data-mdb-ripple-color="dark">Mua hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div clas="loader-txt">
+                    <p>Đang tải dữ liêu! Vui lòng chờ trong giây lát</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
